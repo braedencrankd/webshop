@@ -1,5 +1,5 @@
 <div class="grid grid-cols-4 gap-4 mt-12">
-    <div class="col-span-3 p-5 bg-white rounded-lg shadow">
+    <x-panel class="col-span-3">
         <table class="w-full"> 
             <thead>
                 <tr>
@@ -49,18 +49,18 @@
                 </tr>
             </tfoot>
         </table>
-    </div>
+    </x-panel>
     <div>
-        <div class="p-5 bg-white rounded-lg shadow">
+        <x-panel>
             @guest
                 <p>Please <a class="text-indigo-500 hover:text-indigo-600" href="{{ route('register') }}">register</a> or <a class="text-indigo-500 hover:text-indigo-600" href="{{ route('login') }}">login</a> to continue.</p>
             @endguest
             @auth
-                <x-button wire:click="checkout">
+                <x-button class="justify-center w-full" wire:click="checkout">
                     Checkout
                 </x-button>
             @endauth
-        </div>
+        </x-panel>
     </div>
 </div>
 
