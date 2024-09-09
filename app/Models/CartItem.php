@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductVariant;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class CartItem extends Model
 {
     use HasFactory;
+
+    protected $touches = ['cart'];
 
     protected function subtotal(): Attribute
     {
@@ -26,6 +29,11 @@ class CartItem extends Model
     public function variant(): BelongsTo
     {
         return $this->belongsTo(ProductVariant::class, 'product_variant_id');
+    }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
     }
 
     public function product(): HasOneThrough

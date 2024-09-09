@@ -13,13 +13,13 @@ Route::get('/cart', Cart::class)->name('cart');
 Route::get('/product/{productId}', Product::class)->name('product');
 
 Route::get('/preview', function () {
-  $order = App\Models\Order::first();
+  $cart = auth()->user()->cart;
 
-  if (!$order) {
-    return 'No orders found';
+  if (!$cart) {
+    return 'No cart found';
   }
 
-  return new App\Mail\OrderConfirmation($order);
+  return new App\Mail\AbandonedCartReminder($cart);
 });
 
 Route::middleware([
